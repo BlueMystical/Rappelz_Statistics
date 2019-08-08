@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>Rappelz | Statistics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Ing. Jhollman Chacon R. Cutcsa - 2019">
+    <meta name="copyright" content="ChaoticAngelz">
+    <meta name='description' content='Rappelz Statistics'>
+
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+    <meta expires="Sat, 26 Jul 1997 05:00:00 GMT" />
+    <meta pragma="no-cache" />
+
+
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+   
+    <style type="text/css">
+        #content {
+            padding: 0;
+            position : absolute !important; 
+            top : 40px !important;  
+            right : 0; 
+            bottom : 40px !important;  
+            left : 0 !important;
+        }
+
+        #myPopup {
+            width: 80%;
+            left: auto;
+            right: 0;
+        }
+    </style>
+    <script type="application/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" crossorigin="anonymous"></script>
+    <script type="application/javascript" src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>    
+    <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>  
+    <script type="application/javascript" src="https://momentjs.com/downloads/moment.js"></script>
+    <script type="application/javascript" src="https://momentjs.com/downloads/moment-timezone-with-data.min.js"></script>
+
+</head>
+
+<body>
+    <!-- Pagina de inicio -->
+    <div data-role="page" id="viewMain" class="ui-responsive-panel"  data-position="fixed" data-theme="b"  height="100%">
+    
+        <!-- Popup Help Message -->
+        <div data-role="popup" id="myPopup" data-theme="a" class="ui-content" >            
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <h3>Hi there!</h3>            <hr>
+            <p>So.. you want to see some cool numbers for your Guild or perhaps just for curiosity? Then you are in the right place, but first there is something you should know:<br>
+                <hr>As you may already know Rappelz is a really old game, and so are their servers and websites, 
+                wich we need to conect to in order to gather the data we want to see here.
+                The problem is that back in those ancient times security protocols like <b>HTTPS</b> were merelly science-fiction 
+                and Modern browsers do not like the old ways, at all.<br>
+                <hr>
+                In resume, your browser is Blocking the connections to the Rappelz sites because they are considered 'Unsecure'. 
+            In order to fix this, you need to do as follows:</p>
+            <ul>
+              <li>Click the <b>'Get The Data'</b> button, it wont do anything, but now you can..</li>
+              <li>Find that little <b>'Shield'</b> icon on the address bar and Click on it</li>
+              <li>In the pop-up window, click <b>'Load anyway'</b> or <b>'Load unsafe script'</b></li>
+            </ul>
+            
+            <p>Then reload the page (if it doesn`t automatically) and Click the <b>'Get The Data'</b> button again.</p>
+            <a href="https://imgbb.com/"><img src="https://i.ibb.co/T2yYBmn/1.png" alt="1" border="0"></a><hr>
+            <p>NOTE: In Firefox the Shield icon will be shown on the Left side.</p>
+        </div>
+    
+        <!-- Encabezado -->
+        <div data-role="header" data-theme="b" data-position="fixed" style="text-align: center">
+            <label id="lbTitle"><h3>Rappelz Stadistics</h3></label>
+        </div><!-- /header -->
+        
+        <!-- Cuerpo -->
+        <div role="main" data-theme="b" class="ui-content jqm-content jqm-fullwidth">
+            <div id="contenido" data-theme="b">
+                <!-- ************ AQUI VA EL CONTENIDO DE LA PAGINA ****************** -->
+                <br><br>
+                <label for="srv_date">Welcome, in this page we will gather and compile some usefull statistics from the Rappelz MMO game.<br>
+                    Using for that end the public information about the ranked players. Please read the instructions below.</label>
+                
+                <a href="#" id="cmdHelp" data-role="button" data-theme="a">Read me</a>
+                <p>Ranking updates daily at 2:00AM GMT, check the <a href="http://en.rappelz.webzen.com/Community/Leaderboard/" target="_blank">Rappelz Official Site</a>
+                <hr>
+                <div class=ui-grid-b data-theme="b">
+                    <div class=ui-block-a>  
+                        <label for="srv_date">Rappelz Server Date:</label>
+                        <input type="text" id="srv_date" value="">
+                    </div>
+                    <div class=ui-block-b>   
+                        <label for="srv_date">Next Rank Uptade in:</label>
+                        <input type="text" id="update_rank_timer" value="">
+                    </div>
+                </div> 
+                <div class=ui-grid-b data-theme="b">
+                    <div class=ui-block-a>                         
+                        <select name="cboServidores" id="cboServidores" data-theme="a">
+                            <option></option>
+                            <option value="Unicorn" selected="selected">Unicorn (PVE)</option>
+                            <option value="Reviac">Reviac (PVP)</option>
+                        </select>
+                    </div>                    
+                    <div class=ui-block-b>
+                        <a href="#" id="cmdConsulta" data-role="button" data-theme="b">Get The Data</a>
+                    </div>
+                </div>
+                <div class=ui-grid-b data-theme="b">
+                    <div class=ui-block-a>                         
+                        <select name="cboClases" id="cboClases" data-theme="b">
+                            <option value="All" selected="selected">All</option>     
+                            <option value="Gaia">----Gaia----</option>
+                            <option value="Rogue">Rogue </option>                                                            
+                            <option value="Fighter">Fighter</option>                                                             
+                            <option value="Kahuna">Kahuna</option>                                                            
+                            <option value="Spell-Singer">Spell Singer</option>                                                             
+                            <option value="Champion">Champion</option>                                                             
+                            <option value="Archer">Archer</option>                                                             
+                            <option value="Druid">Druid</option>  
+                            <option value="Battle-Kahuna"> Battle Kahuna</option>                                                             
+                            <option value="Evoker">Evoker</option>                                                             
+                            <option value="Berserker">Berserker</option>                                                             
+                            <option value="Marksman">Marksman</option> 
+                            <option value="Magus">Magus</option> 
+                            <option value="War-Kahuna">War Kahuna</option> 
+                            <option value="Beast-Master">Beast Master</option> 
+                            
+                            <option value="Deva">----Deva----</option> 
+                            <option value="Guide">Guide</option> 
+                            <option value="Holy-Warrior">Holy Warrior</option> 
+                            <option value="Cleric">Cleric</option> 
+                            <option value="Breeder">Breeder</option> 
+                            <option value="Knight">Knight</option> 
+                            <option value="Soldier">Soldier</option> 
+                            <option value="Bishop">Bishop</option> 
+                            <option value="Priest">Priest</option> 
+                            <option value="Soul-Breeder">Soul Breeder</option> 
+                            <option value="Templar">Templar</option> 
+                            <option value="Mercenary">Mercenary</option> 
+                            <option value="Cardinal">Cardinal</option> 
+                            <option value="Oracle">Oracle</option> 
+                            <option value="Master-Breeder">Master Breeder</option> 
+                            
+                            <option value="Asura">----Asura----</option> 
+                            <option value="Stepper"> Stepper</option> 
+                            <option value="Strider"> Strider</option> 
+                            <option value="Dark-Magician Dark"> Magician</option> 
+                            <option value="Sorcerer"> Sorcerer</option> 
+                            <option value="Assassin"> Assassin</option> 
+                            <option value="Shadow-Hunter"> Shadow Hunter</option> 
+                            <option value="Chaos-Magician"> Chaos Magician</option> 
+                            <option value="Warlock"> Warlock</option> 
+                            <option value="Battle-Summoner"> Battle Summoner</option> 
+                            <option value="Slayer"> Slayer</option> 
+                            <option value="Deadeye"> Deadeye</option> 
+                            <option value="Void-Mage"> Void Mage</option> 
+                            <option value="Corruptor"> Corruptor</option> 
+                            <option value="Overlord"> Overlord</option> 
+
+                            
+                        </select>
+                    </div>                    
+                    <div class=ui-block-b>
+                        <a href="#" id="cmdGetClasses" data-role="button" data-theme="b" disable>Get Classes Top</a>
+                    </div>
+                </div>
+                
+                <br><br>
+                <div id='RappelzPage'> </div>        
+                
+            </div>            
+        </div><!-- /main -->
+
+        <!-- Pie de pagina -->
+        <div data-role="footer" data-theme="b" data-position="fixed" style="text-align: center;vertical-align: middle;">
+            
+	   </div><!-- /footer -->
+
+    </div><!-- /page -->
+
+    <script type="application/javascript" src="js/rappelz.js"></script>
+    <script type="application/javascript">
+        //Evento al cargar la pagina
+        $(document).on("pagecreate", "#viewMain", function(){
+            Iniciar();		 
+        });
+
+    </script>
+
+</body>
