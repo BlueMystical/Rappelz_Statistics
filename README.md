@@ -4,6 +4,8 @@ You can use the [editor on GitHub](https://github.com/Jhollman/Rappelz_Statistic
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
+Can acces this website from:  https://bluemystical.github.io/Rappelz_Statistics/
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
